@@ -3,14 +3,12 @@
 # Script de démonstration pour la soutenance
 # Appuyez sur ENTRÉE pour passer à la commande suivante
 
-# Couleurs
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Fonction pour exécuter une commande avec pause
 run_command() {
     local description="$1"
     local command="$2"
@@ -25,14 +23,12 @@ run_command() {
     read -p "Appuyez sur ENTRÉE pour exécuter..."
     echo ""
 
-    # Exécuter la commande
     eval "$command"
 
     echo ""
     read -p "Appuyez sur ENTRÉE pour continuer..."
 }
 
-# Début de la démonstration
 clear
 echo -e "${GREEN}=========================================="
 echo -e "   🚀 DÉMONSTRATION univ-cli"
@@ -43,26 +39,20 @@ echo "de l'application univ-cli."
 echo ""
 read -p "Appuyez sur ENTRÉE pour commencer..."
 
-# 1. Aide générale
 run_command "1. Afficher l'aide générale" "./univ-cli --help"
 
-# 2. Aide de fs
 run_command "2. Afficher l'aide de la commande fs" "./univ-cli fs --help"
 
 # === COMMANDE LS ===
 
-# 3. Liste répertoire courant
 run_command "3. [ls] Lister le répertoire courant" "./univ-cli fs ls"
 
-# 4. Liste avec chemin relatif
 run_command "4. [ls] Lister avec un chemin relatif (internal)" "./univ-cli fs ls internal"
 
-# 5. Erreur ls - dossier inexistant
 run_command "5. [ls] Gestion d'erreur (dossier inexistant)" "./univ-cli fs ls dossier_inexistant"
 
 # === COMMANDE CAT ===
 
-# 6. Préparer un fichier de test
 clear
 echo -e "${YELLOW}Préparation : Création d'un fichier de test${NC}"
 echo "Contenu de test pour démonstration" > demo_test.txt
@@ -209,7 +199,6 @@ echo -e "${YELLOW}Vérification : lister le répertoire après nettoyage${NC}"
 echo ""
 read -p "Appuyez sur ENTRÉE pour voir le résumé..."
 
-# Fin
 clear
 echo ""
 echo -e "${GREEN}=========================================="
