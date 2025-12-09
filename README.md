@@ -4,8 +4,8 @@
 
 `univ-cli` est une application en ligne de commande développée en Go qui offre trois modules principaux :
 - **fs** : Manipulation du système de fichiers (ls, cat, cp, mkdir)
-- **custom** : Fonctionnalités personnalisées (citations, calculatrice, infos système)
-- **tui** : Interface utilisateur textuelle interactive avec en bonus 6 thèmes de couleurs
+- **custom** : Fonctionnalités personnalisées (infos système)
+- **tui** : Interface utilisateur textuelle interactive avec 4 thèmes de couleurs
 
 ## 🚀 Installation
 
@@ -52,13 +52,6 @@ chmod +x univ-cli
 ### Module `custom` - Fonctionnalités personnalisées
 
 ```bash
-# Citation aléatoire inspirante
-./univ-cli custom quote
-
-# Calculatrice simple
-./univ-cli custom calc "42 + 8"
-./univ-cli custom calc "100 / 4"
-
 # Informations système
 ./univ-cli custom sysinfo
 ```
@@ -71,9 +64,9 @@ chmod +x univ-cli
 ```
 
 **Fonctionnalités du TUI :**
-- Menu principal avec 5 options
-- Sous-menu Custom avec citations, calculatrice, sysinfo et mini-jeu
-- 6 thèmes de couleurs personnalisables
+- Menu principal avec 5 options (Date/Heure, Message de bienvenue, Custom, Thèmes, Quitter)
+- Sous-menu Custom avec mini-jeu et sysinfo
+- 4 thèmes de couleurs personnalisables
 - Logo ASCII avec dégradés
 - Navigation : ↑/↓ ou j/k, Enter pour sélectionner, q pour quitter
 
@@ -83,8 +76,6 @@ chmod +x univ-cli
 - Vert Forêt
 - Violet Galaxie
 - Orange Sunset
-- Rouge Cardinal
-- Cyan Arctique
 
 ## 🛠️ Technologies utilisées
 
@@ -123,7 +114,7 @@ chmod +x demo.sh
 
 Le script démontre :
 - Toutes les commandes `fs` avec gestion d'erreurs
-- Toutes les commandes `custom` (via les commandes CLI et via l'interface TUI)
+- La commande `custom sysinfo`
 - L'interface TUI interactive
 
 ## 💡 Cas d'usage
