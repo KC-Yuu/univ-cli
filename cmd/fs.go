@@ -78,7 +78,6 @@ Exemples:
 		source := args[0]
 		destination := args[1]
 
-		// Appeler la fonction de copie
 		if err := filesystem.CopyFile(source, destination); err != nil {
 			PrintError(err)
 			return

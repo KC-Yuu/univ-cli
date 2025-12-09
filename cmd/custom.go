@@ -2,82 +2,61 @@ package cmd
 
 import (
 	"fmt"
-	"univ-cli/internal/custom"
+	"os"
+	"runtime"
 
 	"github.com/spf13/cobra"
 )
 
+// Commande custom : fonctionnalités personnalisées
 var customCmd = &cobra.Command{
 	Use:   "custom",
 	Short: "Commandes personnalisées",
-	Long: `La commande custom offre des fonctionnalités personnalisées supplémentaires.
+	Long: `La commande custom offre des fonctionnalités personnalisées.
 
 Sous-commandes disponibles:
-  quote              Affiche une citation aléatoire
-  sysinfo            Affiche les informations système
-  calc <expression>  Calcule une expression mathématique simple`,
+  sysinfo    Affiche les informations système`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
 }
 
-var quoteCmd = &cobra.Command{
-	Use:   "quote",
-	Short: "Affiche une citation aléatoire",
-	Long: `Affiche une citation inspirante aléatoire.
-
-Exemples:
-  univ-cli custom quote`,
-	Run: func(cmd *cobra.Command, args []string) {
-		quote := custom.GetRandomQuote()
-		PrintInfo(fmt.Sprintf("💭 %s", quote))
-	},
-}
-
+// Sous-commande sysinfo : affiche les informations système
 var sysinfoCmd = &cobra.Command{
 	Use:   "sysinfo",
 	Short: "Affiche les informations système",
-	Long: `Affiche des informations sur le système d'exploitation,
-l'architecture et d'autres détails techniques.
+	Long: `Affiche des informations sur le système :
+- OS et architecture
+- Nombre de CPUs
+- Version de Go
+- Répertoire courant
+- Variables d'environnement
 
-Exemples:
+Exemple:
   univ-cli custom sysinfo`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := custom.DisplaySystemInfo(); err != nil {
-			PrintError(err)
-			return
-		}
-	},
-}
+		fmt.Println("🖥️  Informations Système")
+		fmt.Println("========================")
+		fmt.Println()
 
-var calcCmd = &cobra.Command{
-	Use:   "calc <expression>",
-	Short: "Calcule une expression mathématique simple",
-	Long: `Calcule une expression mathématique simple (addition, soustraction, multiplication, division).
+		fmt.Printf("OS           : %s\n", runtime.GOOS)
+		fmt.Printf("Architecture : %s\n", runtime.GOARCH)
+		fmt.Printf("CPUs         : %d\n", runtime.NumCPU())
+		fmt.Printf("Go version   : %s\n", runtime.Version())
 
-Exemples:
-  univ-cli custom calc "10 + 5"
-  univ-cli custom calc "42 * 2"
-  univ-cli custom calc "100 / 4"
-  univ-cli custom calc "50 - 8"`,
-	Args: cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		expression := args[0]
-
-		result, err := custom.Calculate(expression)
-		if err != nil {
-			PrintError(err)
-			return
+		if cwd, err := os.Getwd(); err == nil {
+			fmt.Printf("Répertoire   : %s\n", cwd)
 		}
 
-		PrintSuccess(fmt.Sprintf("%s = %.2f", expression, result))
+		fmt.Println()
+		fmt.Println("Environnement :")
+		fmt.Printf("  HOME  : %s\n", os.Getenv("HOME"))
+		fmt.Printf("  USER  : %s\n", os.Getenv("USER"))
+		fmt.Printf("  SHELL : %s\n", os.Getenv("SHELL"))
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(customCmd)
-
-	customCmd.AddCommand(quoteCmd)
 	customCmd.AddCommand(sysinfoCmd)
-	customCmd.AddCommand(calcCmd)
 }
